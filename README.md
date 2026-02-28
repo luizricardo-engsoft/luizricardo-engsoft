@@ -1,16 +1,19 @@
-## Hi there 👋
+# Olá, eu sou o Luís Ricardo! 🎸
 
-<!--
-**luizricardo-engsoft/luizricardo-engsoft** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Atualmente sou estudante de **Sistemas de Informação no IFAL (Campus Arapiraca)** e de **Engenharia de Software (Unicesumar)**. Busco unir a lógica da programação com a criatividade da edição visual.
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 🚀 Sobre mim (e como vivo)
+- 🎓 **Foco Acadêmico:** No momento, mergulhado em **Programação Orientada a Objetos (POO)**, Mentalidade Criativa e Fundamentos de S.I.
+- 🏛️ **Atuação:** Assistente Administrativo, conciliando a rotina profissional com o desenvolvimento técnico.
+- 🗣️ **Extensão:** Desenvolvi e ministrei uma palestra/workshop sobre o **Uso Ético de IA** para alunos do Ensino Médio.
+
+### 🛠️ Toolbox Tecnológica
+- **Linguagens:** `C`, `Java` e `CSS`.
+- **Ferramentas de Dev:** `VS Code`, `Git/Github` e `Notion`.
+- **Audiovisual:** `DaVinci Resolve` (Edição e Color Grading).
+
+### 📬 Vamos nos conectar?
+- 📸 **Instagram:** [@luisricardo.dev](https://instagram.com/luisricardo.dev)
+- 🎮 **Discord:** `th.lurii`
