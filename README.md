@@ -1,6 +1,6 @@
 # Olá, eu sou o Luís Ricardo! 🎸
 
-Atualmente sou estudante de **Sistemas de Informação no IFAL (Campus Arapiraca)** e de **Engenharia de Software (Unicesumar)**. Busco unir a lógica da programação com a criatividade da edição visual.
+Atualmente sou estudante de **Sistemas de Informação no IFAL (Campus Arapiraca)**. Busco unir a lógica da programação com a criatividade da edição visual.
 
 ---
 
