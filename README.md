@@ -1,4 +1,4 @@
-# Olá, eu sou o Luís Ricardo! 🎸
+# Olá, me chamo Luís Ricardo! 🎨
 
 Atualmente sou estudante de **Sistemas de Informação no IFAL (Campus Arapiraca)**. Busco unir a lógica da programação com a criatividade visual.
 
