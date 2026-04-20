@@ -9,7 +9,7 @@ Atualmente sou estudante de **Sistemas de Informação no IFAL (Campus Arapiraca
 - 🏛️ **Atuação:** Assistente Administrativo.
 
 ### 🛠️ Toolbox Tecnológica
-- **Linguagens:** `C` e `Java`.
+- **Linguagens:** `C`, `Java` e `Python`.
 - **Ferramentas de Dev:** `VS Code`, `Git/Github` e `Notion`.
 - **Audiovisual:** `DaVinci Resolve` (Edição e Color Grading).
 
