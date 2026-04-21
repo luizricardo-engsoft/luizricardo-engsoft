@@ -178,7 +178,7 @@
 
 <div id="meme-overlay">
     <img id="puppet-gif" src="https://media1.tenor.com/m/RaMKetcZVCAAAAAd/fnaf-2-puppet-gangnam-style.gif" alt="Puppet Dancing">
-    <p style="color:red; font-weight:bold; margin-top:20px;">SISTEMA CORROMPIDO</p>
+    <p style="color:red; font-weight:bold; margin-top:20px; font-size: 18px;">SISTEMA CORROMPIDO</p>
 </div>
 
 <audio id="squeak" src="soundfreddy.mp3"></audio>
@@ -200,9 +200,8 @@
     let musicLevel = 100;
     let musicStarted = false;
 
-    // Volumes
     puppetMusic.volume = 0.15; 
-    puppetDancing.volume = 0.6; // Volume do shitpost um pouco mais alto
+    puppetDancing.volume = 0.7; 
 
     document.body.addEventListener('click', () => {
         if (!musicStarted) {
@@ -227,13 +226,13 @@
         }
     });
 
-    // Lógica da Barra (Dreno mais rápido: 0.35)
+    // Lógica da Barra (Dreno super rápido: 0.6)
     setInterval(() => {
         if (musicLevel > 0) {
-            musicLevel -= 0.35; 
+            musicLevel -= 0.6; 
             musicBar.style.width = musicLevel + "%";
 
-            if (musicLevel < 30) { // Começa a piscar aos 30%
+            if (musicLevel < 35) { // Começa a piscar um pouco antes (35%)
                 musicBar.classList.add("critical-alert");
             } else {
                 musicBar.classList.remove("critical-alert");
@@ -244,7 +243,7 @@
     }, 100);
 
     document.getElementById("music-box-container").addEventListener("click", () => {
-        musicLevel = Math.min(musicLevel + 25, 100);
+        musicLevel = Math.min(musicLevel + 20, 100);
         musicBar.style.width = musicLevel + "%";
     });
 
@@ -252,7 +251,7 @@
         musicLevel = 100; 
         puppetMusic.pause();
         
-        // Reset do GIF para sincronizar com o áudio
+        // Reset do GIF
         const currentSrc = puppetGif.src;
         puppetGif.src = "";
         puppetGif.src = currentSrc;
