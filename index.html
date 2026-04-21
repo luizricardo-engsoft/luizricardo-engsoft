@@ -200,9 +200,8 @@
     let musicLevel = 100;
     let musicStarted = false;
 
-    // Configurações de Áudio
     puppetMusic.volume = 0.15; 
-    puppetDancing.volume = 0.4; // Volume reduzido para não assustar tanto
+    puppetDancing.volume = 0.45; 
 
     document.body.addEventListener('click', () => {
         if (!musicStarted) {
@@ -227,13 +226,13 @@
         }
     });
 
-    // Lógica da Barra (Dreno INSANO: 1.2)
+    // Lógica da Barra (Dreno equilibrado: 0.45)
     setInterval(() => {
         if (musicLevel > 0) {
-            musicLevel -= 1.2; 
+            musicLevel -= 0.45; 
             musicBar.style.width = musicLevel + "%";
 
-            if (musicLevel < 40) { // Alerta começa mais cedo (40%) pela velocidade
+            if (musicLevel < 30) {
                 musicBar.classList.add("critical-alert");
             } else {
                 musicBar.classList.remove("critical-alert");
@@ -244,7 +243,6 @@
     }, 100);
 
     document.getElementById("music-box-container").addEventListener("click", () => {
-        // Cada clique recupera 25% da barra
         musicLevel = Math.min(musicLevel + 25, 100);
         musicBar.style.width = musicLevel + "%";
     });
@@ -258,16 +256,15 @@
         puppetGif.src = "";
         puppetGif.src = currentSrc;
 
-        // TIMING CORRIGIDO: Pula o início do áudio e vai pros 2.8 segundos
-        puppetDancing.currentTime = 2.8; 
+        // Toca do início (já que você cortou o silêncio no arquivo)
+        puppetDancing.currentTime = 0; 
         puppetDancing.play();
         
         memeOverlay.style.display = "flex";
         
-        // Duração total do meme na tela (4 segundos)
         setTimeout(() => {
             memeOverlay.style.display = "none";
-            puppetDancing.pause(); // Para o áudio do meme
+            puppetDancing.pause();
             puppetMusic.play();
         }, 4000); 
     }
