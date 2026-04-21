@@ -191,6 +191,7 @@
     const memeOverlay = document.getElementById("meme-overlay");
     const puppetGif = document.getElementById("puppet-gif");
 
+    let clicks = 0;
     let musicLevel = 100;
     let musicStarted = false;
     let isMemePlaying = false;
@@ -206,10 +207,19 @@
     }, { once: true });
 
     nose.addEventListener("click", () => {
+        clicks++;
         squeak.currentTime = 0;
         squeak.play();
         nose.style.transform = "scale(1.4)";
         setTimeout(() => nose.style.transform = "scale(1)", 120);
+
+        if (clicks >= 5) {
+            alt.currentTime = 0;
+            alt.play();
+            document.body.style.background = "#111";
+            setTimeout(() => document.body.style.background = "#080808", 150);
+            clicks = 0;
+        }
     });
 
     setInterval(() => {
@@ -238,7 +248,6 @@
         isMemePlaying = true;
         puppetMusic.pause();
         
-        // Reset do GIF
         const currentSrc = puppetGif.src;
         puppetGif.src = "";
         puppetGif.src = currentSrc;
@@ -249,7 +258,6 @@
         memeOverlay.style.display = "flex";
     }
 
-    // A MÁGICA DO SYNC: Ouve quando o áudio termina para fechar o overlay
     puppetDancing.addEventListener('ended', () => {
         memeOverlay.style.display = "none";
         musicLevel = 100;
