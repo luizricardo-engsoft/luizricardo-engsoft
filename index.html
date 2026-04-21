@@ -30,7 +30,6 @@
             text-align: center;
         }
 
-        /* AVATAR */
         .avatar-container {
             position: relative;
             width: 76px;
@@ -60,7 +59,6 @@
             z-index: 10;
         }
 
-        /* MUSIC BOX */
         .music-box-label {
             font-size: 9px;
             color: #444;
@@ -92,7 +90,6 @@
             animation: blink-red 0.3s infinite;
         }
 
-        /* LINKS */
         .links-gap {
             display: flex;
             flex-direction: column;
@@ -116,7 +113,6 @@
             transform: translateY(-2px);
         }
 
-        /* MEME OVERLAY */
         #meme-overlay {
             position: fixed;
             top: 0;
@@ -147,7 +143,6 @@
 <body>
 
 <div class="container">
-    
     <div class="avatar-container">
         <img src="https://i.pinimg.com/736x/6d/43/2a/6d432a5422e7daf8dbb2f55ae1b74206.jpg" class="avatar-img" alt="Freddy">
         <div id="nose"></div>
@@ -159,7 +154,7 @@
     <div style="font-size:12px; color:#777; margin:8px 0 24px;">sistemas de informação · projetos reais</div>
 
     <div class="music-box-label">Wind Up Music Box</div>
-    <div id="music-box-container" title="DÊ CORDA!">
+    <div id="music-box-container">
         <div id="music-box-bar"></div>
     </div>
 
@@ -201,11 +196,11 @@
     let musicStarted = false;
 
     puppetMusic.volume = 0.15; 
-    puppetDancing.volume = 0.45; 
+    puppetDancing.volume = 0.15; 
 
     document.body.addEventListener('click', () => {
         if (!musicStarted) {
-            puppetMusic.play().catch(e => console.log("Áudio aguardando..."));
+            puppetMusic.play().catch(e => console.log(e));
             musicStarted = true;
         }
     }, { once: true });
@@ -226,7 +221,6 @@
         }
     });
 
-    // Lógica da Barra (Dreno equilibrado: 0.45)
     setInterval(() => {
         if (musicLevel > 0) {
             musicLevel -= 0.45; 
@@ -251,12 +245,10 @@
         musicLevel = 100; 
         puppetMusic.pause();
         
-        // Reset do GIF
         const currentSrc = puppetGif.src;
         puppetGif.src = "";
         puppetGif.src = currentSrc;
 
-        // Toca do início (já que você cortou o silêncio no arquivo)
         puppetDancing.currentTime = 0; 
         puppetDancing.play();
         
