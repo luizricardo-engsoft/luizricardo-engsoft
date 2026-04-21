@@ -191,9 +191,9 @@
     const memeOverlay = document.getElementById("meme-overlay");
     const puppetGif = document.getElementById("puppet-gif");
 
-    let clicks = 0;
     let musicLevel = 100;
     let musicStarted = false;
+    let isMemePlaying = false;
 
     puppetMusic.volume = 0.15; 
     puppetDancing.volume = 0.15; 
@@ -206,23 +206,14 @@
     }, { once: true });
 
     nose.addEventListener("click", () => {
-        clicks++;
         squeak.currentTime = 0;
         squeak.play();
         nose.style.transform = "scale(1.4)";
         setTimeout(() => nose.style.transform = "scale(1)", 120);
-
-        if (clicks >= 5) {
-            alt.currentTime = 0;
-            alt.play();
-            document.body.style.background = "#111";
-            setTimeout(() => document.body.style.background = "#080808", 150);
-            clicks = 0;
-        }
     });
 
     setInterval(() => {
-        if (musicLevel > 0) {
+        if (musicLevel > 0 && !isMemePlaying) {
             musicLevel -= 0.45; 
             musicBar.style.width = musicLevel + "%";
 
@@ -231,20 +222,23 @@
             } else {
                 musicBar.classList.remove("critical-alert");
             }
-        } else {
+        } else if (musicLevel <= 0 && !isMemePlaying) {
             triggerMeme();
         }
     }, 100);
 
     document.getElementById("music-box-container").addEventListener("click", () => {
-        musicLevel = Math.min(musicLevel + 25, 100);
-        musicBar.style.width = musicLevel + "%";
+        if (!isMemePlaying) {
+            musicLevel = Math.min(musicLevel + 25, 100);
+            musicBar.style.width = musicLevel + "%";
+        }
     });
 
     function triggerMeme() {
-        musicLevel = 100; 
+        isMemePlaying = true;
         puppetMusic.pause();
         
+        // Reset do GIF
         const currentSrc = puppetGif.src;
         puppetGif.src = "";
         puppetGif.src = currentSrc;
@@ -253,13 +247,15 @@
         puppetDancing.play();
         
         memeOverlay.style.display = "flex";
-        
-        setTimeout(() => {
-            memeOverlay.style.display = "none";
-            puppetDancing.pause();
-            puppetMusic.play();
-        }, 4000); 
     }
+
+    // A MÁGICA DO SYNC: Ouve quando o áudio termina para fechar o overlay
+    puppetDancing.addEventListener('ended', () => {
+        memeOverlay.style.display = "none";
+        musicLevel = 100;
+        isMemePlaying = false;
+        puppetMusic.play();
+    });
 </script>
 
 </body>
