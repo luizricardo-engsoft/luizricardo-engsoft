@@ -178,7 +178,7 @@
 
 <div id="meme-overlay">
     <img id="puppet-gif" src="https://media1.tenor.com/m/RaMKetcZVCAAAAAd/fnaf-2-puppet-gangnam-style.gif" alt="Puppet Dancing">
-    <p style="color:red; font-weight:bold; margin-top:20px; font-size: 18px;">SISTEMA CORROMPIDO</p>
+    <p style="color:red; font-weight:bold; margin-top:20px; font-size: 18px; letter-spacing: 2px;">SISTEMA CORROMPIDO</p>
 </div>
 
 <audio id="squeak" src="soundfreddy.mp3"></audio>
@@ -200,8 +200,9 @@
     let musicLevel = 100;
     let musicStarted = false;
 
+    // Configurações de Áudio
     puppetMusic.volume = 0.15; 
-    puppetDancing.volume = 0.7; 
+    puppetDancing.volume = 0.4; // Volume reduzido para não assustar tanto
 
     document.body.addEventListener('click', () => {
         if (!musicStarted) {
@@ -226,13 +227,13 @@
         }
     });
 
-    // Lógica da Barra (Dreno super rápido: 0.6)
+    // Lógica da Barra (Dreno INSANO: 1.2)
     setInterval(() => {
         if (musicLevel > 0) {
-            musicLevel -= 0.6; 
+            musicLevel -= 1.2; 
             musicBar.style.width = musicLevel + "%";
 
-            if (musicLevel < 35) { // Começa a piscar um pouco antes (35%)
+            if (musicLevel < 40) { // Alerta começa mais cedo (40%) pela velocidade
                 musicBar.classList.add("critical-alert");
             } else {
                 musicBar.classList.remove("critical-alert");
@@ -243,7 +244,8 @@
     }, 100);
 
     document.getElementById("music-box-container").addEventListener("click", () => {
-        musicLevel = Math.min(musicLevel + 20, 100);
+        // Cada clique recupera 25% da barra
+        musicLevel = Math.min(musicLevel + 25, 100);
         musicBar.style.width = musicLevel + "%";
     });
 
@@ -256,14 +258,16 @@
         puppetGif.src = "";
         puppetGif.src = currentSrc;
 
-        puppetDancing.currentTime = 0;
+        // TIMING CORRIGIDO: Pula o início do áudio e vai pros 2.8 segundos
+        puppetDancing.currentTime = 2.8; 
         puppetDancing.play();
         
         memeOverlay.style.display = "flex";
         
-        // Duração do shitpost (4 segundos)
+        // Duração total do meme na tela (4 segundos)
         setTimeout(() => {
             memeOverlay.style.display = "none";
+            puppetDancing.pause(); // Para o áudio do meme
             puppetMusic.play();
         }, 4000); 
     }
