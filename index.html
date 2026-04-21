@@ -60,9 +60,9 @@
     clique no detalhe 👀
   </div>
 
-  <!-- ÁUDIOS -->
-  <audio id="squeak" src="squeak.mp3"></audio>
-  <audio id="altSound" src="alt.mp3"></audio>
+  <!-- ÁUDIOS (CORRIGIDO) -->
+  <audio id="squeak" src="soundfreddy.mp3"></audio>
+  <audio id="altSound" src="hor hor hor hor.freddy.mp3"></audio>
 
   <!-- NOME -->
   <div style="font-size:20px; font-weight:bold;">
@@ -136,18 +136,18 @@ nose.addEventListener("click", () => {
   clearTimeout(timeout);
   timeout = setTimeout(() => clicks = 0, 1200);
 
-  // som normal
+  // som principal
   squeak.currentTime = 0;
-  squeak.play();
+  squeak.play().catch(e => console.log("erro áudio 1", e));
 
   // efeito visual
   nose.style.transform = "scale(1.4)";
   setTimeout(() => nose.style.transform = "scale(1)", 120);
 
-  // easter egg: 5 cliques rápidos
+  // easter egg
   if (clicks >= 5) {
     alt.currentTime = 0;
-    alt.play();
+    alt.play().catch(e => console.log("erro áudio 2", e));
 
     document.body.style.background = "#111";
     setTimeout(() => {
