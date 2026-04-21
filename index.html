@@ -21,20 +21,48 @@
 
   <!-- AVATAR -->
   <div style="
+    position:relative;
     width:76px;
     height:76px;
     border-radius:50%;
     overflow:hidden;
     border:1px solid rgba(255,255,255,0.18);
     background:#111;
-    margin:0 auto 16px;
+    margin:0 auto 6px;
   ">
+
     <img 
-      src="https://i.pinimg.com/736x/48/6c/84/486c84575e4b3e8b9dc4f4e491880c5d.jpg"
+      src="https://i.pinimg.com/736x/6d/43/2a/6d432a5422e7daf8dbb2f55ae1b74206.jpg"
       style="width:100%; height:100%; object-fit:cover;"
-      onerror="this.style.display='none'; this.parentElement.innerHTML='LR';"
     >
+
+    <!-- NARIZ -->
+    <div id="nose" style="
+      position:absolute;
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      top:34px;
+      left:32px;
+      cursor:pointer;
+      transition:0.15s;
+    "></div>
+
   </div>
+
+  <!-- HINT DISCRETA -->
+  <div style="
+    font-size:10px;
+    color:#333;
+    margin-bottom:14px;
+    user-select:none;
+  ">
+    clique no detalhe 👀
+  </div>
+
+  <!-- ÁUDIOS -->
+  <audio id="squeak" src="squeak.mp3"></audio>
+  <audio id="altSound" src="alt.mp3"></audio>
 
   <!-- NOME -->
   <div style="font-size:20px; font-weight:bold;">
@@ -85,5 +113,51 @@
   </div>
 
 </div>
+
+<script>
+const nose = document.getElementById("nose");
+const squeak = document.getElementById("squeak");
+const alt = document.getElementById("altSound");
+
+let clicks = 0;
+let timeout;
+
+nose.addEventListener("mouseenter", () => {
+  nose.style.boxShadow = "0 0 6px rgba(255,255,255,0.3)";
+});
+
+nose.addEventListener("mouseleave", () => {
+  nose.style.boxShadow = "none";
+});
+
+nose.addEventListener("click", () => {
+  clicks++;
+
+  clearTimeout(timeout);
+  timeout = setTimeout(() => clicks = 0, 1200);
+
+  // som normal
+  squeak.currentTime = 0;
+  squeak.play();
+
+  // efeito visual
+  nose.style.transform = "scale(1.4)";
+  setTimeout(() => nose.style.transform = "scale(1)", 120);
+
+  // easter egg: 5 cliques rápidos
+  if (clicks >= 5) {
+    alt.currentTime = 0;
+    alt.play();
+
+    document.body.style.background = "#111";
+    setTimeout(() => {
+      document.body.style.background = "#080808";
+    }, 150);
+
+    clicks = 0;
+  }
+});
+</script>
+
 </body>
 </html>
