@@ -3,30 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@luisricardo.dev — links</title>
+<title>@luisricardo.dev — system</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 @keyframes blink-red {
-    0% { background: #444; }
-    50% { background: #ff0000; box-shadow: 0 0 12px #ff0000; }
-    100% { background: #444; }
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
 
-* {
-    box-sizing: border-box;
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
 }
 
 body {
     margin: 0;
-    background: #080808;
-    color: #f0f0f0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #050505;
+    color: #dcdcdc;
+    font-family: 'Share Tech Mono', monospace;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     padding: 40px 16px;
     overflow-x: hidden;
-    transition: background 0.2s;
+}
+
+/* SCANLINE EFFECT */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        rgba(255,255,255,0.03) 50%,
+        transparent 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
 }
 
 /* CONTAINER */
@@ -37,129 +51,134 @@ body {
 }
 
 /* AVATAR */
-.avatar-container {
+.avatar {
     position: relative;
-    width: 82px;
-    height: 82px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: #111;
-    margin: 0 auto 8px;
+    margin: 0 auto 10px;
+    border: 1px solid #222;
+    box-shadow: 0 0 15px rgba(255,0,0,0.2);
 }
 
-.avatar-img {
+.avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* NARIZ CLICK */
+/* CLICK AREA */
 #nose {
     position: absolute;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    top: 36px;
-    left: 34px;
+    width: 16px;
+    height: 16px;
+    top: 40px;
+    left: 36px;
     cursor: pointer;
-    z-index: 10;
 }
 
-/* TEXTOS */
+/* TEXT */
 .username {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
+    color: #fff;
 }
 
 .bio {
-    font-size: 13px;
+    font-size: 12px;
     color: #777;
-    margin: 8px 0 22px;
+    margin: 6px 0 20px;
 }
 
 .tip {
     font-size: 10px;
-    color: #333;
-    margin-bottom: 14px;
+    color: #444;
+    margin-bottom: 10px;
 }
 
 /* MUSIC BAR */
-.music-box-label {
+.music-label {
     font-size: 10px;
-    color: #444;
+    color: #555;
     margin-bottom: 6px;
-    letter-spacing: 1px;
 }
 
-#music-box-container {
-    width: 100%;
-    height: 10px;
+.music-bar {
+    height: 8px;
     background: #111;
     border: 1px solid #222;
-    border-radius: 6px;
+    border-radius: 4px;
+    overflow: hidden;
     margin-bottom: 24px;
     cursor: pointer;
-    overflow: hidden;
 }
 
-#music-box-bar {
-    width: 100%;
+.music-progress {
     height: 100%;
-    background: #444;
+    width: 100%;
+    background: #666;
     transition: width 0.1s linear;
 }
 
-.critical-alert {
-    animation: blink-red 0.3s infinite;
+.critical {
+    background: red !important;
+    animation: blink-red 0.4s infinite;
 }
 
 /* LINKS */
-.links-gap {
+.links {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.link-card {
+.link {
     padding: 14px;
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 10px;
+    background: #0b0b0b;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
+    color: #ccc;
     text-decoration: none;
-    color: #fff;
-    transition: all 0.2s ease;
-    display: block;
+    transition: 0.2s;
+    position: relative;
 }
 
-.link-card:hover {
-    background: #161616;
-    border-color: #444;
-    transform: translateY(-2px);
+.link:hover {
+    background: #111;
+    border-color: #333;
+    color: #fff;
+}
+
+/* warning strip */
+.link::before {
+    content: "SYSTEM LINK";
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    font-size: 8px;
+    color: #444;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 30px;
+    font-size: 10px;
+    color: #333;
 }
 
 /* OVERLAY */
 #meme-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.95);
+    background: black;
     display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 9999;
 }
 
 #meme-overlay img {
     max-width: 90%;
-    max-height: 70%;
-    border-radius: 10px;
-}
-
-.footer {
-    margin-top: 28px;
-    font-size: 11px;
-    color: #333;
 }
 </style>
 </head>
@@ -168,135 +187,66 @@ body {
 
 <div class="container">
 
-    <div class="avatar-container">
-        <img src="https://i.pinimg.com/736x/6d/43/2a/6d432a5422e7daf8dbb2f55ae1b74206.jpg" class="avatar-img">
+    <div class="avatar">
+        <img src="https://i.pinimg.com/736x/6d/43/2a/6d432a5422e7daf8dbb2f55ae1b74206.jpg">
         <div id="nose"></div>
     </div>
 
-    <div class="tip">clique no detalhe 👀</div>
+    <div class="tip">[ hidden trigger ]</div>
 
     <div class="username">@luisricardo.dev</div>
-    <div class="bio">sistemas de informação · projetos reais</div>
+    <div class="bio">system: online · monitoring links</div>
 
-    <div class="music-box-label">Wind Up Music Box</div>
-    <div id="music-box-container">
-        <div id="music-box-bar"></div>
+    <div class="music-label">MUSIC BOX STATUS</div>
+    <div class="music-bar" id="musicBox">
+        <div class="music-progress" id="musicProgress"></div>
     </div>
 
-    <div class="links-gap">
-
-        <a href="https://www.instagram.com/luisricardo.dev/" target="_blank" rel="noopener noreferrer" class="link-card">📱 Instagram</a>
-
-        <a href="https://pin.it/4TDXnlbeu" target="_blank" rel="noopener noreferrer" class="link-card">📌 Pinterest</a>
-
-        <a href="https://music.youtube.com/@th.oyasuumii" target="_blank" rel="noopener noreferrer" class="link-card">🎧 YouTube Music</a>
-
-        <!-- ✅ SPOTIFY CORRIGIDO -->
-        <a href="https://open.spotify.com/user/uvdtunh9f618fegc0hd1ep4ue" target="_blank" rel="noopener noreferrer" class="link-card">🎵 Spotify</a>
-
-        <a href="https://github.com/luizricardo-engsoft" target="_blank" rel="noopener noreferrer" class="link-card">💻 GitHub</a>
-
-        <div class="link-card" style="cursor:default;">💬 Discord: th.lurii</div>
-
-        <a href="mailto:luisricardo12278@gmail.com" class="link-card">✉️ Email</a>
-
+    <div class="links">
+        <a href="https://www.instagram.com/luisricardo.dev/" target="_blank" class="link">📱 Instagram</a>
+        <a href="https://pin.it/4TDXnlbeu" target="_blank" class="link">📌 Pinterest</a>
+        <a href="https://music.youtube.com/@th.oyasuumii" target="_blank" class="link">🎧 YouTube Music</a>
+        <a href="https://open.spotify.com/user/uvdtunh9f618fegc0hd1ep4ue" target="_blank" class="link">🎵 Spotify</a>
+        <a href="https://github.com/luizricardo-engsoft" target="_blank" class="link">💻 GitHub</a>
+        <div class="link">💬 Discord: th.lurii</div>
+        <a href="mailto:luisricardo12278@gmail.com" class="link">✉️ Email</a>
     </div>
 
-    <div class="footer">feito por mim</div>
+    <div class="footer">system build by you</div>
 </div>
 
 <div id="meme-overlay">
-    <img id="puppet-gif" src="https://media1.tenor.com/m/RaMKetcZVCAAAAAd/fnaf-2-puppet-gangnam-style.gif">
-    <p style="color:red; font-weight:bold; margin-top:20px;">SISTEMA CORROMPIDO</p>
+    <img src="https://media1.tenor.com/m/RaMKetcZVCAAAAAd/fnaf-2-puppet-gangnam-style.gif">
+    <p style="color:red;">SYSTEM FAILURE</p>
 </div>
 
-<audio id="squeak" src="soundfreddy.mp3"></audio>
-<audio id="altSound" src="hor hor hor hor.freddy.mp3"></audio>
-<audio id="puppetMusic" src="puppet_music.mp3" loop></audio>
-<audio id="puppetDancing" src="puppet_dancing.mp3"></audio>
-
 <script>
-const nose = document.getElementById("nose");
-const squeak = document.getElementById("squeak");
-const alt = document.getElementById("altSound");
-const puppetMusic = document.getElementById("puppetMusic");
-const puppetDancing = document.getElementById("puppetDancing");
-const musicBar = document.getElementById("music-box-bar");
-const memeOverlay = document.getElementById("meme-overlay");
-const puppetGif = document.getElementById("puppet-gif");
+let music = 100;
+let playing = false;
 
-let clicks = 0;
-let musicLevel = 100;
-let musicStarted = false;
-let isMemePlaying = false;
-
-puppetMusic.volume = 0.15;
-puppetDancing.volume = 0.15;
-
-document.body.addEventListener('click', () => {
-    if (!musicStarted) {
-        puppetMusic.play().catch(()=>{});
-        musicStarted = true;
-    }
-}, { once: true });
-
-nose.addEventListener("click", () => {
-    clicks++;
-    squeak.currentTime = 0;
-    squeak.play();
-
-    nose.style.transform = "scale(1.4)";
-    setTimeout(() => nose.style.transform = "scale(1)", 120);
-
-    if (clicks >= 5) {
-        alt.currentTime = 0;
-        alt.play();
-        document.body.style.background = "#111";
-        setTimeout(() => document.body.style.background = "#080808", 150);
-        clicks = 0;
-    }
-});
+const bar = document.getElementById("musicProgress");
+const overlay = document.getElementById("meme-overlay");
 
 setInterval(() => {
-    if (musicLevel > 0 && !isMemePlaying) {
-        musicLevel -= 0.45;
-        musicBar.style.width = musicLevel + "%";
+    if (!playing) {
+        music -= 0.5;
+        bar.style.width = music + "%";
 
-        if (musicLevel < 30) {
-            musicBar.classList.add("critical-alert");
-        } else {
-            musicBar.classList.remove("critical-alert");
+        if (music < 30) {
+            bar.classList.add("critical");
         }
-    } else if (musicLevel <= 0 && !isMemePlaying) {
-        triggerMeme();
+
+        if (music <= 0) {
+            overlay.style.display = "flex";
+            playing = true;
+        }
     }
 }, 100);
 
-document.getElementById("music-box-container").addEventListener("click", () => {
-    if (!isMemePlaying) {
-        musicLevel = Math.min(musicLevel + 25, 100);
-        musicBar.style.width = musicLevel + "%";
-    }
-});
-
-function triggerMeme() {
-    isMemePlaying = true;
-    puppetMusic.pause();
-
-    puppetGif.src = puppetGif.src;
-
-    puppetDancing.currentTime = 0;
-    puppetDancing.play();
-
-    memeOverlay.style.display = "flex";
-}
-
-puppetDancing.addEventListener('ended', () => {
-    memeOverlay.style.display = "none";
-    musicLevel = 100;
-    isMemePlaying = false;
-    puppetMusic.play();
-});
+document.getElementById("musicBox").onclick = () => {
+    music = Math.min(music + 25, 100);
+    bar.style.width = music + "%";
+};
 </script>
 
 </body>
