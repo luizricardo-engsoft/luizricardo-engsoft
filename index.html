@@ -14,11 +14,6 @@
     100% { opacity: 1; }
 }
 
-@keyframes scanline {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
 body {
     margin: 0;
     background: #050505;
@@ -27,30 +22,16 @@ body {
     display: flex;
     justify-content: center;
     padding: 40px 16px;
-    overflow-x: hidden;
 }
 
-/* SCANLINE EFFECT */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(
-        rgba(255,255,255,0.03) 50%,
-        transparent 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-}
-
-/* CONTAINER */
+/* container */
 .container {
     width: 100%;
     max-width: 400px;
     text-align: center;
 }
 
-/* AVATAR */
+/* avatar */
 .avatar {
     position: relative;
     width: 90px;
@@ -59,7 +40,6 @@ body::after {
     overflow: hidden;
     margin: 0 auto 10px;
     border: 1px solid #222;
-    box-shadow: 0 0 15px rgba(255,0,0,0.2);
 }
 
 .avatar img {
@@ -68,7 +48,6 @@ body::after {
     object-fit: cover;
 }
 
-/* CLICK AREA */
 #nose {
     position: absolute;
     width: 16px;
@@ -78,31 +57,11 @@ body::after {
     cursor: pointer;
 }
 
-/* TEXT */
-.username {
-    font-size: 18px;
-    color: #fff;
-}
+/* textos */
+.username { font-size: 18px; }
+.bio { font-size: 12px; color: #777; margin-bottom: 20px; }
 
-.bio {
-    font-size: 12px;
-    color: #777;
-    margin: 6px 0 20px;
-}
-
-.tip {
-    font-size: 10px;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-/* MUSIC BAR */
-.music-label {
-    font-size: 10px;
-    color: #555;
-    margin-bottom: 6px;
-}
-
+/* barra */
 .music-bar {
     height: 8px;
     background: #111;
@@ -117,7 +76,6 @@ body::after {
     height: 100%;
     width: 100%;
     background: #666;
-    transition: width 0.1s linear;
 }
 
 .critical {
@@ -125,7 +83,7 @@ body::after {
     animation: blink-red 0.4s infinite;
 }
 
-/* LINKS */
+/* links */
 .links {
     display: flex;
     flex-direction: column;
@@ -139,34 +97,14 @@ body::after {
     border-radius: 6px;
     color: #ccc;
     text-decoration: none;
-    transition: 0.2s;
-    position: relative;
 }
 
 .link:hover {
     background: #111;
     border-color: #333;
-    color: #fff;
 }
 
-/* warning strip */
-.link::before {
-    content: "SYSTEM LINK";
-    position: absolute;
-    top: -8px;
-    left: 10px;
-    font-size: 8px;
-    color: #444;
-}
-
-/* FOOTER */
-.footer {
-    margin-top: 30px;
-    font-size: 10px;
-    color: #333;
-}
-
-/* OVERLAY */
+/* overlay */
 #meme-overlay {
     position: fixed;
     inset: 0;
@@ -177,9 +115,6 @@ body::after {
     flex-direction: column;
 }
 
-#meme-overlay img {
-    max-width: 90%;
-}
 </style>
 </head>
 
@@ -192,27 +127,18 @@ body::after {
         <div id="nose"></div>
     </div>
 
-    <div class="tip">[ hidden trigger ]</div>
-
     <div class="username">@luisricardo.dev</div>
-    <div class="bio">system: online · monitoring links</div>
+    <div class="bio">system monitoring...</div>
 
-    <div class="music-label">MUSIC BOX STATUS</div>
     <div class="music-bar" id="musicBox">
         <div class="music-progress" id="musicProgress"></div>
     </div>
 
     <div class="links">
-        <a href="https://www.instagram.com/luisricardo.dev/" target="_blank" class="link">📱 Instagram</a>
-        <a href="https://pin.it/4TDXnlbeu" target="_blank" class="link">📌 Pinterest</a>
-        <a href="https://music.youtube.com/@th.oyasuumii" target="_blank" class="link">🎧 YouTube Music</a>
-        <a href="https://open.spotify.com/user/uvdtunh9f618fegc0hd1ep4ue" target="_blank" class="link">🎵 Spotify</a>
-        <a href="https://github.com/luizricardo-engsoft" target="_blank" class="link">💻 GitHub</a>
-        <div class="link">💬 Discord: th.lurii</div>
-        <a href="mailto:luisricardo12278@gmail.com" class="link">✉️ Email</a>
+        <a href="https://www.instagram.com/luisricardo.dev/" target="_blank" class="link">Instagram</a>
+        <a href="https://open.spotify.com/user/uvdtunh9f618fegc0hd1ep4ue" target="_blank" class="link">Spotify</a>
     </div>
 
-    <div class="footer">system build by you</div>
 </div>
 
 <div id="meme-overlay">
@@ -220,15 +146,50 @@ body::after {
     <p style="color:red;">SYSTEM FAILURE</p>
 </div>
 
-<script>
-let music = 100;
-let playing = false;
+<!-- ÁUDIOS RESTAURADOS -->
+<audio id="squeak" src="soundfreddy.mp3"></audio>
+<audio id="altSound" src="hor hor hor hor.freddy.mp3"></audio>
+<audio id="puppetMusic" src="puppet_music.mp3" loop></audio>
+<audio id="puppetDancing" src="puppet_dancing.mp3"></audio>
 
+<script>
+const nose = document.getElementById("nose");
+const squeak = document.getElementById("squeak");
+const alt = document.getElementById("altSound");
+const puppetMusic = document.getElementById("puppetMusic");
+const puppetDancing = document.getElementById("puppetDancing");
 const bar = document.getElementById("musicProgress");
 const overlay = document.getElementById("meme-overlay");
 
+let clicks = 0;
+let music = 100;
+let started = false;
+let meme = false;
+
+/* iniciar música ao primeiro clique */
+document.body.addEventListener('click', () => {
+    if (!started) {
+        puppetMusic.play().catch(()=>{});
+        started = true;
+    }
+}, { once: true });
+
+/* nariz */
+nose.addEventListener("click", () => {
+    clicks++;
+    squeak.currentTime = 0;
+    squeak.play();
+
+    if (clicks >= 5) {
+        alt.currentTime = 0;
+        alt.play();
+        clicks = 0;
+    }
+});
+
+/* music box */
 setInterval(() => {
-    if (!playing) {
+    if (!meme) {
         music -= 0.5;
         bar.style.width = music + "%";
 
@@ -237,15 +198,32 @@ setInterval(() => {
         }
 
         if (music <= 0) {
-            overlay.style.display = "flex";
-            playing = true;
+            trigger();
         }
     }
 }, 100);
 
 document.getElementById("musicBox").onclick = () => {
-    music = Math.min(music + 25, 100);
-    bar.style.width = music + "%";
+    if (!meme) {
+        music = Math.min(music + 25, 100);
+        bar.style.width = music + "%";
+    }
+};
+
+/* evento */
+function trigger() {
+    meme = true;
+    puppetMusic.pause();
+    puppetDancing.currentTime = 0;
+    puppetDancing.play();
+    overlay.style.display = "flex";
+}
+
+puppetDancing.onended = () => {
+    overlay.style.display = "none";
+    music = 100;
+    meme = false;
+    puppetMusic.play();
 };
 </script>
 
