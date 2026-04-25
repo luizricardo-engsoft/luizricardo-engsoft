@@ -296,13 +296,12 @@ const squeak        = document.getElementById("squeak");
 const alt           = document.getElementById("altSound");
 const puppetMusic   = document.getElementById("puppetMusic");
 const puppetDancing = document.getElementById("puppetDancing");
-const jumpscare     = document.getElementById("jumpscare");
 const bar           = document.getElementById("musicProgress");
 const barWrap       = document.getElementById("musicBox");
 const overlay       = document.getElementById("meme-overlay");
 const puppetGif     = document.getElementById("puppet-gif");
 const pctEl         = document.getElementById("music-pct");
-const warnEl         = document.getElementById("warnText");
+const warnEl        = document.getElementById("warnText");
 
 const GIF_URL = "https://media1.tenor.com/m/RaMKetcZVCAAAAAd/fnaf-2-puppet-gangnam-style.gif";
 
@@ -315,7 +314,8 @@ function unlock() {
     if (unlocked) return;
     unlocked = true;
 
-    const all = [squeak, alt, puppetMusic, puppetDancing, jumpscare];
+    // Jumpscare removido desta lista para não quebrar o código
+    const all = [squeak, alt, puppetMusic, puppetDancing];
     all.forEach(a => {
         a.muted = true;
         a.play()
@@ -373,8 +373,7 @@ function triggerPuppet() {
     meme = true;
     puppetMusic.pause();
 
-    jumpscare.currentTime = 0;
-    jumpscare.play().catch(() => {});
+    // Comandos do jumpscare removidos daqui
 
     puppetGif.src = "";
     puppetGif.src = GIF_URL;
